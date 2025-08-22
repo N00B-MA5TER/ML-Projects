@@ -14,10 +14,10 @@ working_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 # loading the saved models
-diabetes_model = pickle.load(open(f"{working_dir}\Trained-Models\Diabetes_trained_model.sav", 'rb'))
-heart_disease_model = pickle.load(open(f"{working_dir}\Trained-Models\Heart_disease_trained_model.sav", 'rb'))
-parkinsons_model = pickle.load(open(f"{working_dir}\Trained-Models\Parkinsons_trained_model.sav", 'rb'))
-breast_cancer_model = pickle.load(open(f"{working_dir}\Trained-Models\Breast_Cancer_trained_model.sav", 'rb'))
+diabetes_model = pickle.load(open(f"{working_dir}/Trained-Models/Diabetes_trained_model.sav", 'rb'))
+heart_disease_model = pickle.load(open(f"{working_dir}/Trained-Models/Heart_disease_trained_model.sav", 'rb'))
+parkinsons_model = pickle.load(open(f"{working_dir}/Trained-Models/Parkinsons_trained_model.sav", 'rb'))
+breast_cancer_model = pickle.load(open(f"{working_dir}/Trained-Models/Breast_Cancer_trained_model.sav", 'rb'))
 
 with st.sidebar:
     selected = option_menu("Multiple Disease Prediction System", 
@@ -357,5 +357,6 @@ if (selected == 'Breast Cancer Prediction'):
             breast_cancer_diagnosis = "The Breast Cancer is Benign"
         else:
             breast_cancer_diagnosis = "The Breast Cancer is Malignant"
+
 
     st.success(breast_cancer_diagnosis)
