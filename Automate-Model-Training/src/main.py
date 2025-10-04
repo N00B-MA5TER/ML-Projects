@@ -1,6 +1,7 @@
 import os
 
 import streamlit as st
+os.system("pip install streamlit-option-menu")
 from streamlit_option_menu import option_menu
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
@@ -70,5 +71,6 @@ if df is not None:
         model = train_model(X_train, y_train, model_to_be_trained, model_name)
 
         accuracy = evaluate_model(model, X_test, y_test)
+
 
         st.success("Test Accuracy: " + str(accuracy))
