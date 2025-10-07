@@ -6,6 +6,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
+import pickle
 
 
 from ml_utility import (read_data,
@@ -81,3 +82,4 @@ if df is not None:
 
 
         st.success("Test Accuracy: " + str(accuracy))
+
