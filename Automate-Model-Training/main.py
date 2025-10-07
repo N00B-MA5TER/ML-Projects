@@ -69,6 +69,15 @@ if df is not None:
 
         model = train_model(X_train, y_train, model_to_be_trained, model_name)
 
+        model_bytes = pickle.dumps(model)
+        st.download_button(
+            label="Download Trained Model",
+            data=model_bytes,
+            file_name=f"{model_name}.pkl",
+            mime="application/octet-stream"
+        )
+
         accuracy = evaluate_model(model, X_test, y_test)
+
 
         st.success("Test Accuracy: " + str(accuracy))
