@@ -7,7 +7,8 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 import pickle
-
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 from ml_utility import (read_data,
                         preprocess_data,
@@ -55,12 +56,35 @@ if df is not None:
 
     with col1:
         target_column = st.selectbox("Select the Target Column", list(df.columns))
+        selected_feature = st.selectbox("Select a feature to visualize against the target", [col for col in df.columns if col != target_column])
     with col2:
         scaler_type = st.selectbox("Select a scaler", scaler_type_list)
     with col3:
         selected_model = st.selectbox("Select a Model", list(model_dictionary.keys()))
     with col4:
         model_name = st.text_input("Model name")
+
+    if selected_feature:
+        st.subheader("Exploratory Data Visualization")
+        fig, ax = plt.subplots()
+        if df[selected_feature].dtype == 'object' or df[selected_feature].dtype.name == 'category':
+            # For categorical features
+            sns.countplot(data=df, x=selected_feature, hue=target_column, ax=ax)
+            ax.set_title(f"{selected_feature} vs {target_column}")
+        else:
+            # For numerical features
+            sns.histplot(
+                data=df,
+                x=selected_feature,
+                hue=target_column,
+                kde=True,           # adds a smooth density line
+                bins=30,            # adjust number of bins as needed
+                alpha=0.6,          # transparency for overlapping colors
+                ax=ax
+            )
+            ax.set_title(f"Distribution of {selected_feature} by {target_column}")
+
+        st.pyplot(fig)
 
     if st.button("Train the Model"):
 
@@ -82,4 +106,5 @@ if df is not None:
 
 
         st.success("Test Accuracy: " + str(accuracy))
+
 
