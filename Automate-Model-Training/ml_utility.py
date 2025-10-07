@@ -83,9 +83,6 @@ def preprocess_data(df, target_column, scaler_type):
 def train_model(X_train, y_train, model, model_name):
     # training the selected model
     model.fit(X_train, y_train)
-    # saving the trained model
-    with open(f"{working_dir}/trained_model/{model_name}.pkl", 'wb') as file:
-        pickle.dump(model, file)
     return model
 
 
@@ -94,4 +91,5 @@ def evaluate_model(model, X_test, y_test):
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
     accuracy = round(accuracy, 2)
+
     return accuracy
